@@ -13,16 +13,13 @@ let port = 1234;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use('/pdvs', pdv);
+app.use('/ze-delivery', app.get('/', (req, res) => { return res.sendStatus(200) }))
+app.use('/ze-delivery/pdvs', pdv);
 
 
-
-//db.on('error', log.error.bind(log, 'MongoDB connection error:'));
 
 app.listen(port, () => {
     log.info(`The server is running on port number  ${port}`);
-    //db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-    //db.on('error', log.error.bind(log, 'MongoDB connection error:'));
 
     db.once('open', () => log.info('Connected!'))
         .on('error', (error) => {

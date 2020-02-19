@@ -30,7 +30,7 @@ function list(req, res) {
 
 };
 
-function findBylenAndlat(req, res) {
+function findByLngAndLat(req, res) {
     try {
 
         const errors = validationResult(req);
@@ -65,4 +65,4 @@ function findById(req, res) {
 
 
 
-module.exports = { list, findBylenAndlat, save, findById }
+module.exports = { list, findByLngAndLat: findByLngAndLat, save, findById }

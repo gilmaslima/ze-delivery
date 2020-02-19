@@ -181,7 +181,7 @@ describe('controllers/pdv.controller', function () {
             })
 		};
 
-        ctrl.findBylenAndlat(req, res)
+        ctrl.findByLngAndLat(req, res)
         
         expect(res.send.calledWith(expectedModels))
         
@@ -205,7 +205,7 @@ describe('controllers/pdv.controller', function () {
 
         
         
-        ctrl.findBylenAndlat(req, res)
+        ctrl.findByLngAndLat(req, res)
         
         expect(res.send.notCalled)
         expect(res.status.calledWith(500))
@@ -229,7 +229,7 @@ describe('controllers/pdv.controller', function () {
 
         
         
-        ctrl.findBylenAndlat(req, res)
+        ctrl.findByLngAndLat(req, res)
         
         expect(res.send.notCalled)
         expect(res.status.calledWith(422))
