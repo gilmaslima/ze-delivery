@@ -1,6 +1,6 @@
 const log = require('./log')
 
-function handle(e, res){
+function handler(e, req, res, next){
 
     if(e.name == 'ValidationError'){
         log.error(e);
@@ -9,7 +9,7 @@ function handle(e, res){
         log.error(e);
         res.status(500).send(JSON.stringify(e))
     }
-
+    next();
 }
 
-module.exports = handle;
+module.exports = handler;

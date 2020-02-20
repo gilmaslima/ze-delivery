@@ -17,16 +17,20 @@ describe('utils/error.handler', function () {
 
     it('Should return http status code 500 for generic error', function () {
         var error = new Error();
-        handle(error, res)
+        var next = sinon.stub();
+        handle(error, null, res, next)
         expect(res.status.calledWith(500)).to.equal(true);
+        expect(next.calledOnce)
     });
 
     it('Should return http status code 422 for validation error', function () {
         var error = {
             name: "ValidationError"
         };
-        handle(error, res)
+        var next = sinon.stub();
+        handle(error, null, res, next)
         expect(res.status.calledWith(422)).to.equal(true);
+        expect(next.calledOnce)
     });
 
 

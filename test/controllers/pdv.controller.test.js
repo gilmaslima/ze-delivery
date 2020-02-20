@@ -63,10 +63,11 @@ describe('controllers/pdv.controller', function () {
                 send: sinon.stub()
             })
 		};
-
+        var next = sinon.stub()
         ctrl.list(req, res)
         
         expect(res.send.calledWith({pdvs: [expectedModels]}))
+        expect(next.notCalled)
         
 	});
 
@@ -81,10 +82,12 @@ describe('controllers/pdv.controller', function () {
                 send: sinon.stub()
             })
 		};
+        var next = sinon.stub();
 
-        ctrl.list(req, res)
+        ctrl.list(req, res, next)
         
         expect(res.status.calledWith(500))
+        expect(next.calledOnce)
         
 	});
 
@@ -99,10 +102,11 @@ describe('controllers/pdv.controller', function () {
                 send: sinon.stub()
             })
 		};
-
-        ctrl.list(req, res)
+        var next = sinon.stub();
+        ctrl.list(req, res, next)
         
         expect(res.status.calledWith(422))
+        expect(next.calledOnce)
         
     });
     
@@ -120,11 +124,13 @@ describe('controllers/pdv.controller', function () {
                 json: jsonStub
             })
         };
+        var next = sinon.stub();
 
-        ctrl.save(req, res)
+        ctrl.save(req, res, next)
         
         expect(res.status.calledWith(201))
         expect(jsonStub.calledWith(expectedModels))
+        expect(next.notCalled)
         
 	});
 
@@ -139,10 +145,11 @@ describe('controllers/pdv.controller', function () {
                 send: sinon.stub()
             })
 		};
-
-        ctrl.list(req, res)
+        var next = sinon.stub();
+        ctrl.list(req, res, next)
         
         expect(res.status.calledWith(422))
+        expect(next.calledOnce)
         
     });
 
@@ -156,11 +163,11 @@ describe('controllers/pdv.controller', function () {
                 send: sinon.stub()
             })
 		};
-
-        ctrl.list(req, res)
+        var next = sinon.stub();
+        ctrl.list(req, res, next)
         
         expect(res.status.calledWith(500))
-        
+        expect(next.calledOnce)
 	});
 
 
@@ -180,11 +187,11 @@ describe('controllers/pdv.controller', function () {
                 send: sinon.stub()
             })
 		};
-
-        ctrl.findByLngAndLat(req, res)
+        var next = sinon.stub();
+        ctrl.findByLngAndLat(req, res, next)
         
         expect(res.send.calledWith(expectedModels))
-        
+        expect(next.notCalled)
 	});
 
 
@@ -204,12 +211,12 @@ describe('controllers/pdv.controller', function () {
 		};
 
         
-        
-        ctrl.findByLngAndLat(req, res)
+        var next = sinon.stub();
+        ctrl.findByLngAndLat(req, res, next)
         
         expect(res.send.notCalled)
         expect(res.status.calledWith(500))
-
+        expect(next.calledOnce)
 	});
 
 
@@ -227,13 +234,12 @@ describe('controllers/pdv.controller', function () {
             })
 		};
 
-        
-        
-        ctrl.findByLngAndLat(req, res)
+        var next = sinon.stub();
+        ctrl.findByLngAndLat(req, res, next)
         
         expect(res.send.notCalled)
         expect(res.status.calledWith(422))
-
+        expect(next.calledOnce)
 	});
 
 
@@ -250,11 +256,12 @@ describe('controllers/pdv.controller', function () {
             status: sinon.stub()
         };
 
-        ctrl.findById(req, res)
+        var next = sinon.stub();
+        ctrl.findById(req, res, next)
         
         expect(res.send.calledWith(expectedModels))
         expect(res.status.notCalled)
-
+        expect(next.notCalled)
 	});
 
 
@@ -273,11 +280,12 @@ describe('controllers/pdv.controller', function () {
             })
 		};
 
-        ctrl.findById(req, res)
+        var next = sinon.stub();
+        ctrl.findById(req, res, next)
         
         expect(res.send.notCalled)
         expect(res.status.calledWith(500))
-        
+        expect(next.calledOnce)      
 	});
 
     it('should return http status 422 for validation error on find by id request ', function() {
@@ -295,11 +303,12 @@ describe('controllers/pdv.controller', function () {
             })
 		};
 
-        ctrl.findById(req, res)
+        var next = sinon.stub();
+        ctrl.findById(req, res, next)
         
         expect(res.send.notCalled)
         expect(res.status.calledWith(422))
-        
+        expect(next.calledOnce)
 	});
 
 

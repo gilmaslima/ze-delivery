@@ -2,35 +2,34 @@ const Pdv = require('../models/pdv.model');
 const service = require('../services/pdv.service');
 const log = require('../utils/log');
 const { validationResult } = require('express-validator');
-const handle = require('../utils/error.handler');
 
 
-function save(req, res) {
+function save(req, res, next) {
 
     try {
         const result = service.save(req.body)
         log.info(`Data ${result} saved.`)
         res.status(201).json(result)
     } catch (e) {
-        return handle(e, res);
+        next(e);
     }
 
 
 }
 
-function list(req, res) {
+function list(req, res, next) {
     try {
         const result = service.list();
 
         log.info(`Retrieving data ${result}`);
         res.send({ pdvs: result });
     } catch (e) {
-        return handle(e, res);
+        next(e);
     }
 
 };
 
-function findByLngAndLat(req, res) {
+function findByLngAndLat(req, res, next) {
     try {
 
         const errors = validationResult(req);
@@ -43,11 +42,11 @@ function findByLngAndLat(req, res) {
         res.send(result);
 
     } catch (e) {
-        return handle(e, res);
+        next(e);
     }
 }
 
-function findById(req, res) {
+function findById(req, res, next) {
     try {
         const id = req.params['id'];
 
@@ -59,7 +58,7 @@ function findById(req, res) {
 
 
     } catch (e) {
-        return handle(e, res);
+        next(e);
     }
 }
 
