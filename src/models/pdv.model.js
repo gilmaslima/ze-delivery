@@ -29,11 +29,10 @@ let PdvSchema = new Schema({
         },
         coordinates: {
             type: Array,
-            index: '2d',
+            index: '3d',
             required: true
         }
-    }
-    ,
+    },
     address: {
         type: {
             type: String,
@@ -43,9 +42,10 @@ let PdvSchema = new Schema({
         coordinates: {
             type: Array,
             required: true,
-            index: '1d'
+            index: '2d'
         }
     }
+    
 })
 
 

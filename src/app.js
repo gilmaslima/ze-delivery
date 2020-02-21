@@ -6,14 +6,14 @@ const log = require('./utils/log')
 const handler = require('./utils/error.handler')
 const app = express();
 
-// TODO: pegar do env
-let port = 1234;
+
+let port = process.env.port || 3000
 
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use('/ze-delivery', app.get('/', (req, res) => { return res.sendStatus(200) }))
+
 app.use('/ze-delivery/pdvs', pdv);
 app.use(handler);
 

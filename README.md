@@ -29,11 +29,56 @@ Data base:
 * MongoDB - Was chosed because provide an easy way to store and retrieve GeoJson objects.
 
 
-Build:
-* *******TODO
+How to install:
+* Go to mongo/ directory and run:<br>
+<code>docker build -t ze-mongo .</code>
 
-Code coverage:
-* *******TODO
+* Run the following command:<br>
+<code>
+docker run -d --name ze-mongo  -p 27017:27017 ze-mongo
+</code>
+
+* Go to / (root directory) and run:<br>
+<code>docker build -t ze-app .</code>
+
+* Run the following command:<br>
+<code>
+docker create --name ze-app -p 3000:3000 ze-app
+</code>
+
+* Run the following command to create a network:<br> 
+<code>
+docker network create ze-network
+</code>
+
+* Add containers to network with the follow command:<br>
+<code>
+docker network connect ze-network ze-mongo
+</code>
+<br>
+<code>
+docker network connect ze-network ze-app
+</code>
+
+* To start application run: <br>
+<code>
+docker start ze-app
+</code>
+
+* Other commands to do some troubleshoot<br>
+* To see network status and attached containers:
+<br>
+<code>
+docker network inspect ze-network
+</code>
+
+<br>
+
+* To test connectivity between containers:<br>
+<code>
+
+docker exec -ti ze-app ping ze-mongo
+</code>
 
 
 ## Application layers

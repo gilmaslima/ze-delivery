@@ -4,6 +4,8 @@ const log = require('../utils/log')
 
 async function save(obj) {
 
+    obj.address.coordinates = [-43.297337, -23.013538]
+    
     var pdv = new Pdv(
         obj
     );

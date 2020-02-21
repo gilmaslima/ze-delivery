@@ -4,10 +4,10 @@ const log = require('../utils/log');
 const { validationResult } = require('express-validator');
 
 
-function save(req, res, next) {
+async function save(req, res, next) {
 
     try {
-        const result = service.save(req.body)
+        const result = await service.save(req.body)
         log.info(`Data ${result} saved.`)
         res.status(201).json(result)
     } catch (e) {
@@ -17,9 +17,9 @@ function save(req, res, next) {
 
 }
 
-function list(req, res, next) {
+async function list(req, res, next) {
     try {
-        const result = service.list();
+        const result = await service.list();
 
         log.info(`Retrieving data ${result}`);
         res.send({ pdvs: result });
@@ -29,7 +29,7 @@ function list(req, res, next) {
 
 };
 
-function findByLngAndLat(req, res, next) {
+async function findByLngAndLat(req, res, next) {
     try {
 
         const errors = validationResult(req);
@@ -37,7 +37,7 @@ function findByLngAndLat(req, res, next) {
             log.error(`Invalid request ${JSON.stringify(req.query)}`);
             return res.status(422).jsonp(errors.array());
         }
-        const result = service.findBylngAndlat(req.query.lng, req.query.lat);
+        const result = await service.findBylngAndlat(req.query.lng, req.query.lat);
         log.info(`Retrieving data ${result}`);
         res.send(result);
 
@@ -46,12 +46,12 @@ function findByLngAndLat(req, res, next) {
     }
 }
 
-function findById(req, res, next) {
+async function findById(req, res, next) {
     try {
         const id = req.params['id'];
 
         if (id) {
-            const result = service.findById(id);
+            const result = await service.findById(id);
             log.info(`Retrieving data ${result}`);
             res.send(result);
         }
